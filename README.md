@@ -3,11 +3,13 @@
 Requirements:
 1. Aiogram 3.x
 2. Dotenv
+3. Aiocryptopay
 (pip install -r requirements.txt)
 
 Conten in .env:
 `TOKEN='BOT_TOKEN' 
-ADMIN_ID='ADMIN_ID'`
+ADMIN_ID='ADMIN_ID'
+CRYPTO_TOKEN='CRYPTOBOT_TOKEN'`
 
 Content:
 bot.py - main script
@@ -29,3 +31,4 @@ Purpose/Application: Support bot on telgram with information table and functions
     After if user send message he gets message "Send to admin" and admin (ADMIN_ID) get his appeal and can response to him through button "Response"
     After this response come to user and the success of this alert to admin
 3.  Feedback work this - send review, select metod (anonim/not anonim) and review send to to the specified id (both the channel and the user (admin))
+4.  Donate - user click to the button and donate to you
