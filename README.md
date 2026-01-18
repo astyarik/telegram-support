@@ -7,9 +7,11 @@ Requirements:
 (pip install -r requirements.txt)
 
 Conten in .env:
-`TOKEN='BOT_TOKEN' 
+```
+TOKEN='BOT_TOKEN' 
 ADMIN_ID='ADMIN_ID'
-CRYPTO_TOKEN='CRYPTOBOT_TOKEN'`
+CRYPTO_TOKEN='CRYPTOBOT_TOKEN'
+```
 
 Content:
 bot.py - main script
