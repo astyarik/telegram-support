@@ -5,6 +5,7 @@ import app.keyboards as kb
 from app.keyboards import main, admin_kb, feedbacky, us_kb
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
+from aiocryptopay import AioCryptoPay, Networks
 
 import json
 import os
@@ -36,6 +37,14 @@ already_voted = None
 
 already_voted = set()
 
+CRYPTO_TOKEN = os.getenv("CRYPTO_TOKEN")
+crypto_token = CRYPTO_TOKEN=CRYPTO_TOKEN
+async def get_crypto():
+    crypto = AioCryptoPay(
+        token=CRYPTO_TOKEN,
+        network=Networks.MAIN_NET
+    )
+    return crypto
 # For support part
 class user_message(StatesGroup):
     contex = State()
@@ -201,6 +210,30 @@ async def catalog(callback: CallbackQuery):
     await callback.message.edit_text("Text2",
         reply_markup=us_kb())
 
+# Donate (No buy anything, ONLY donate)
+@router.callback_query(F.data == "donate")
+async def donate_handler(callback: CallbackQuery):
+    crypto = await get_crypto()
+    try:
+        invoice0 = await crypto.create_invoice(asset="TON", amount=1) # Can edit number
+        invoice1 = await crypto.create_invoice(asset="TON", amount=2) # Can edit number
+        invoice2 = await crypto.create_invoice(asset="TON", amount=3) # Can edit number
+        pay_kb = InlineKeyboardMarkup(inline_keyboard=[
+            [InlineKeyboardButton(text="Pay 1 TON", url=invoice0.bot_invoice_url)],
+            [InlineKeyboardButton(text="Pay 2 TON", url=invoice1.bot_invoice_url)],
+            [InlineKeyboardButton(text="Pay 3 TON", url=invoice2.bot_invoice_url)]
+        ])
+        await callback.message.answer(
+            "WELOCME TEXT", 
+            reply_markup=pay_kb
+        )
+    except Exception as e:
+        print(f"Error of pay: {e}")
+        await callback.answer("Error, try late")
+    finally:
+        await crypto.close() 
+    await callback.answer()
+    
 # Go back to menu
 @router.callback_query(F.data == 'go_main')
 async def catalog(callback: CallbackQuery):
