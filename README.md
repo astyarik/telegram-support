@@ -4,7 +4,7 @@ Requirements:
 1. Aiogram 3.x
 2. Dotenv
 3. Aiocryptopay
-(pip install -r requirements.txt)
+`(pip install -r requirements.txt)`
 
 Conten in .env:
 ```
