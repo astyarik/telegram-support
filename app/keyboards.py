@@ -5,7 +5,8 @@ from aiogram.utils.keyboard import ReplyKeyboardBuilder, InlineKeyboardBuilder
 main = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text='Information', callback_data='information')],
     [InlineKeyboardButton(text='Support', callback_data='support')],
-    [InlineKeyboardButton(text='Feedback', callback_data='feedback')]
+    [InlineKeyboardButton(text='Feedback', callback_data='feedback')],
+    [InlineKeyboardButton(text='Donate', callback_data='donate')],
 ])
 
 feedbacky = InlineKeyboardMarkup(inline_keyboard=[
